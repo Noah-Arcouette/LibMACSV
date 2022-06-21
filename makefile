@@ -17,10 +17,18 @@ clean:
 configure:
 	mkdir -p ./bin/ ./obj/
 
-# install:
+install: clean configure ${LIB}
+	cp ${LIB} /lib/lib${OUT}.a
+	cp ./inc/acsv.h /usr/include/acsv.h
 
-# uninstall:
+	mkdir -p /etc/mimik/docs/LibMACSV
+	cp ./doc/* /etc/mimik/docs/LibMACSV/
 
+uninstall:
+	rm ${LIB} /lib/lib${OUT}.a -f
+	rm ./inc/acsv.h /usr/include/acsv.h -f
+
+	rm /etc/mimik/docs/LibMACSV/ -rf
 
 ${TEST}: ./obj/main.o ./obj/acsv.o ./inc/acsv.h
 	${CC} -o ${TEST} ./obj/*.o

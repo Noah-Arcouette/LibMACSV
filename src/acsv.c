@@ -28,11 +28,11 @@ struct MIMIK_ACSV acsvParse (char *data)
 
     if (data[i] == ';' || data[i] == ':')
     {
-      if (val)
-      {
-        val  = 0;
-        size = 1;
+      val  = !val;
+      size = 1;
 
+      if (!val)
+      {
         conf.size++;
         conf.keys               = (char**)realloc(conf.keys, conf.size * sizeof(char*));
         conf.keys[conf.size-1]  = (char*) malloc(1 * sizeof(char));
@@ -40,12 +40,13 @@ struct MIMIK_ACSV acsvParse (char *data)
         conf.vals               = (char**)realloc(conf.vals, conf.size * sizeof(char*));
         conf.vals[conf.size-1]  = (char*) malloc(1 * sizeof(char));
         *conf.vals[conf.size-1] = 0;
-
-        continue;
       }
 
-      size = 1;
-      val  = 1;
+      if (data[i] == ':' && data[i+1] != 0)
+      {
+        i++;
+      }
+
       continue;
     }
 

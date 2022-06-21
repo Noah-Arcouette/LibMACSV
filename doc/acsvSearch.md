@@ -10,7 +10,7 @@ ssize_t acsvSearch (struct MIMIK_ACSV conf, char *key);
 
 # DESCRIPTION
 
-Search for key in ACSV structure and return the index or -1 if not found
+Search for `key` in ACSV structure `conf` and return the index or -1 if not found
 
 # USAGE
 

@@ -33,7 +33,7 @@ The Mimik ACSV Library structure for storing ACSV data in C
 # EXAMPLES
 
 ```
-# conf is an initialized acsv structure;
+# conf is an initialized acsv structure
 
 printf("first key %s\n", conf.keys[0][0]);
 ```

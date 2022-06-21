@@ -6,11 +6,13 @@
 struct MIMIK_ACSV acsvParse (char *data)
 {
   struct MIMIK_ACSV conf;
-  conf.size    = 1;
-  conf.keys    = (char**)malloc(1 * sizeof(char*));
-  conf.keys[0] = (char*)NULL;
-  conf.vals    = (char**)malloc(1 * sizeof(char*));
-  conf.vals[0] = (char*)NULL;
+  conf.size        = 1;
+  conf.keys        = (char**)malloc(1 * sizeof(char*));
+  *conf.keys       = (char*) malloc(1 * sizeof(char));
+  **conf.keys      = 0;
+  conf.vals        = (char**)malloc(1 * sizeof(char*));
+  *conf.vals       = (char*) malloc(1 * sizeof(char));
+  **conf.vals      = 0;
 
   register size_t size = 1;
   register int    val  = 0;
@@ -19,7 +21,12 @@ struct MIMIK_ACSV acsvParse (char *data)
   {
     // printf("%c ; %d ; %ld ; %ld\n", data[i], val, size, conf.size);
 
-    if (data[i] == ';')
+    if (data[i] == '\n' || data[i] == '\r' || data[i] == '\t')
+    {
+      continue;
+    }
+
+    if (data[i] == ';' || data[i] == ':')
     {
       if (val)
       {
@@ -27,17 +34,18 @@ struct MIMIK_ACSV acsvParse (char *data)
         size = 1;
 
         conf.size++;
-        conf.keys              = (char**)realloc(conf.keys, conf.size * sizeof(char*));
-        conf.keys[conf.size-1] = (char*)NULL;
-        conf.vals              = (char**)realloc(conf.vals, conf.size * sizeof(char*));
-        conf.vals[conf.size-1] = (char*)NULL;
+        conf.keys               = (char**)realloc(conf.keys, conf.size * sizeof(char*));
+        conf.keys[conf.size-1]  = (char*) malloc(1 * sizeof(char));
+        *conf.keys[conf.size-1] = 0;
+        conf.vals               = (char**)realloc(conf.vals, conf.size * sizeof(char*));
+        conf.vals[conf.size-1]  = (char*) malloc(1 * sizeof(char));
+        *conf.vals[conf.size-1] = 0;
 
         continue;
       }
 
-      conf.vals[0] = (char*)malloc(1 * sizeof(char));
-      size         = 1;
-      val          = 1;
+      size = 1;
+      val  = 1;
       continue;
     }
 

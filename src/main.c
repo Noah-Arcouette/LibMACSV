@@ -4,14 +4,14 @@
 int main ()
 {
   acsv conf = acsvParse("\
-key;value;\
-");
-/*
+key;value;\n\
 value with space: value;\n\
 empty;;\n\
 empty with space: ;\n\
 solo key;\n\
-*/
+solo key with space: \n\
+");
+
   for (size_t i = 0; i<conf.size; i++)
   {
     printf("%s : %s\n", conf.keys[i], conf.vals[i]);

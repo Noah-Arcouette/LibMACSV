@@ -64,13 +64,33 @@ struct MIMIK_ACSV acsvParse (char *data)
     strncat(conf.keys[conf.size-1], &data[i], 1);
   }
 
+  conf.size--;
+
   return conf;
 }
 
-// char* acsvGen (struct MIMIK_ACSV conf)
-// {
-//
-// }
+char* acsvGen (struct MIMIK_ACSV conf)
+{
+  register char *gen   = (char*)malloc(1 * sizeof(char));
+  *gen                 = 0;
+  register size_t size = 1;
+
+  for (register size_t i = 0; i<conf.size; i++)
+  {
+    if (conf.keys[i])
+    {
+      size += strlen(conf.keys[i]) + strlen(conf.vals[i]) + 2;
+      gen   = (char*)realloc(gen, size * sizeof(char));
+
+      strcat(gen, conf.keys[i]);
+      strcat(gen, ";");
+      strcat(gen, conf.vals[i]);
+      strcat(gen, ";");
+    }
+  }
+
+  return gen;
+}
 
 void acsvFree (struct MIMIK_ACSV conf)
 {

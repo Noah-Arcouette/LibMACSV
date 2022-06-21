@@ -40,6 +40,8 @@ struct MIMIK_ACSV acsvParse (char *data)
         conf.vals               = (char**)realloc(conf.vals, conf.size * sizeof(char*));
         conf.vals[conf.size-1]  = (char*) malloc(1 * sizeof(char));
         *conf.vals[conf.size-1] = 0;
+
+        continue;
       }
 
       if (data[i] == ':' && data[i+1] != 0)

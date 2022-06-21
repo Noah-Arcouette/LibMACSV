@@ -119,10 +119,17 @@ ssize_t acsvSearch (struct MIMIK_ACSV conf, char *find)
   return -1;
 }
 
-// void acsvAdd (struct MIMIK_ACSV *conf, char *key, char *value)
-// {
-//
-// }
+void acsvAdd (struct MIMIK_ACSV *conf, char *key, char *value)
+{
+  conf->size++;
+  conf->keys = (char**)realloc(conf->keys, conf->size * sizeof(char*));
+  conf->vals = (char**)realloc(conf->vals, conf->size * sizeof(char*));
+
+  conf->keys[conf->size-1]  = (char*)malloc((1 + strlen(key)) * sizeof(char));
+  strcpy(conf->keys[conf->size-1], key);
+  conf->vals[conf->size-1]  = (char*)malloc((1 + strlen(value)) * sizeof(char));
+  strcpy(conf->vals[conf->size-1], value);
+}
 
 void acsvRemove (struct MIMIK_ACSV *conf, char *key)
 {

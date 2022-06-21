@@ -95,8 +95,15 @@ void acsvFree (struct MIMIK_ACSV conf)
 // {
 //
 // }
-//
-// void acsvRemove (struct MIMIK_ACSV *conf, char *key)
-// {
-//
-// }
+
+void acsvRemove (struct MIMIK_ACSV *conf, char *key)
+{
+  for (register size_t i = 0; i<conf->size; i++)
+  {
+    if (conf->keys[i] && !strcmp(conf->keys[i], key))
+    {
+      free(conf->keys[i]);
+      conf->keys[i] = NULL;
+    }
+  }
+}

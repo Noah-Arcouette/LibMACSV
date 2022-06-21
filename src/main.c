@@ -10,6 +10,9 @@ empty;;\n\
 empty with space: ;\n\
 ");
 
+  acsvRemove(&conf, "empty");
+  acsvRemove(&conf, "key");
+
   for (size_t i = 0; i<conf.size; i++)
   {
     printf("%s : %s\n", conf.keys[i], conf.vals[i]);

@@ -106,11 +106,19 @@ void acsvFree (struct MIMIK_ACSV conf)
   free(conf.vals);
 }
 
-// ssize_t acsvSearch (struct MIMIK_ACSV conf, char *find)
-// {
-//
-// }
-//
+ssize_t acsvSearch (struct MIMIK_ACSV conf, char *find)
+{
+  for (register size_t i = 0; i<conf.size; i++)
+  {
+    if (conf.keys[i] && !strcmp(conf.keys[i], find))
+    {
+      return i;
+    }
+  }
+
+  return -1;
+}
+
 // void acsvAdd (struct MIMIK_ACSV *conf, char *key, char *value)
 // {
 //

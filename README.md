@@ -20,7 +20,7 @@ Mimik Advanced Colon Separated Values Library
 
 # Dirs
 
-Header `/usr/include/acsv.h`
+Header `/usr/include/macsv.h`
 
 Library `/lib/libmacsv.a`
 

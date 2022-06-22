@@ -19,14 +19,14 @@ configure:
 
 install: clean configure ${LIB}
 	cp ${LIB} /lib/lib${OUT}.a
-	cp ./inc/acsv.h /usr/include/acsv.h
+	cp ./inc/macsv.h /usr/include/macsv.h
 
 	mkdir -p /etc/mimik/docs/LibMACSV
 	cp ./doc/* /etc/mimik/docs/LibMACSV/
 
 uninstall:
-	rm ${LIB} /lib/lib${OUT}.a -f
-	rm ./inc/acsv.h /usr/include/acsv.h -f
+	rm /lib/lib${OUT}.a -f
+	rm /usr/include/macsv.h -f
 
 	rm /etc/mimik/docs/LibMACSV/ -rf
 

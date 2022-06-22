@@ -1,10 +1,10 @@
 # NAME
 
-**acsv** **libmacsv** - Mimik Advanced Colon Separated Values Library
+**LibMACSV** - Mimik Advanced Colon Separated Values Library
 
 # SYNOPSIS
 
-**LibMACSV** Include file is **acsv.h** and library is **libmacsv.a**
+**LibMACSV** Include file is **macsv.h** and library is **libmacsv.a**
 
 # DESCRIPTION
 

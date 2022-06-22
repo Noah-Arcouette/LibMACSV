@@ -30,14 +30,14 @@ uninstall:
 
 	rm /etc/mimik/docs/LibMACSV/ -rf
 
-${TEST}: ./obj/main.o ./obj/acsv.o ./inc/acsv.h
+${TEST}: ./obj/main.o ./obj/acsv.o ./inc/macsv.h
 	${CC} -o ${TEST} ./obj/*.o
 
 ${LIB}: ./obj/acsv.o
 	ar rcs ${LIB} ./obj/acsv.o
 
-./obj/main.o: ./inc/acsv.h ./src/main.c
+./obj/main.o: ./inc/macsv.h ./src/main.c
 	${CC} -o ./obj/main.o -c ./src/main.c
 
-./obj/acsv.o: ./src/acsv.c ./inc/acsv.h
+./obj/acsv.o: ./src/acsv.c ./inc/macsv.h
 	${CC} -o ./obj/acsv.o -c ./src/acsv.c

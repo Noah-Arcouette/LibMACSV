@@ -28,7 +28,7 @@ The Software must not be used to Collect, Save, Distribute, and/or make profit
 from User information.
 
 2.
-All the Software must contain this License and a link to the Source, at the top of
+All the Software, excluding documentation, must contain this License and a link to the Source, at the top or bottom of
 the file.
 
 3.

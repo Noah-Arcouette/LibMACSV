@@ -1,6 +1,6 @@
 #!/bin/sh
 
-VER=1.4
+VER=1.1
 
 if make VERSION=${VER}
 then

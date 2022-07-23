@@ -2,7 +2,7 @@
 
 mkdir -p ./bin/ ./obj/
 
-make build CFLAGS="$1" VERSION="1.4"
+make build CFLAGS="$1" VERSION="1.1"
 
 sudo cp ./bin/libmacsv.a /lib/libmacsv.a
 sudo cp ./inc/macsv.h /usr/include/macsv.h

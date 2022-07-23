@@ -1,0 +1,8 @@
+#!/bin/sh
+
+VER=1.4
+
+if make VERSION=${VER}
+then
+	./bin/libmacsv
+fi

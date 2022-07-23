@@ -2,6 +2,7 @@
 #define __LIBRARY_MIMIK_ACSV_H__
 
 #include <stddef.h>
+#include <sys/types.h>
 
 typedef struct MIMIK_ACSV acsv;
 

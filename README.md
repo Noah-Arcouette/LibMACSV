@@ -5,12 +5,12 @@ Mimik Advanced Colon Separated Values Library
 
 # Install
 
-`sudo make install`
+`./install`
 
 
 # Uninstall
 
-`sudo make uninstall`
+`./uninstall`
 
 
 # Build

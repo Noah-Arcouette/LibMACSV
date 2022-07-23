@@ -1,0 +1,8 @@
+#!/bin/sh
+
+make clean
+
+sudo rm /lib/libmacsv.a -f
+sudo rm /usr/include/macsv.h -f
+
+sudo rm /etc/mimik/docs/LibMACSV/ -rf

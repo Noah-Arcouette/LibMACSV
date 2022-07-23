@@ -1,0 +1,13 @@
+#!/bin/sh
+
+mkdir -p ./bin/ ./obj/
+
+make build CFLAGS="$1" VERSION="1.4"
+
+sudo cp ./bin/libmacsv.a /lib/libmacsv.a
+sudo cp ./inc/macsv.h /usr/include/macsv.h
+
+sudo mkdir -p /etc/mimik/docs/LibMACSV
+sudo cp ./doc/* /etc/mimik/docs/LibMACSV/
+
+printf "\x1b[1;32mInstalled!\x1b[0m\n"

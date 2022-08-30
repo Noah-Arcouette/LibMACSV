@@ -104,9 +104,9 @@ char* acsvGen (struct MIMIK_ACSV conf)
   char *key;
   char *val;
 
-  for (register size_t i = 0; i<conf.size && conf.keys[i][0]; i++)
+  for (register size_t i = 0; i<conf.size; i++)
   {
-    if (conf.keys[i])
+    if (conf.keys[i] && conf.keys[i][0])
     {
       key = acsv_addExp(conf.keys[i]);
       val = acsv_addExp(conf.vals[i]);

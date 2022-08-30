@@ -5,7 +5,7 @@
 int main ()
 {
   acsv conf = acsvParse("\
-key;value;\n\
+key;value\\:\\\\hi;\n\
 ");
 
   acsvAdd(&conf, "kely", "vlauew");

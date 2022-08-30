@@ -21,12 +21,12 @@ struct MIMIK_ACSV acsvParse (char *data)
   {
     // printf("%c ; %d ; %ld ; %ld\n", data[i], val, size, conf.size);
 
-    if (data[i] == '\n' || data[i] == '\r' || data[i] == '\t')
+    if (data[i] == '\n' || data[i] == '\r' || data[i] == '\t' || (data[i] == '\\' && i>0 && data[i-1] != '\\'))
     {
       continue;
     }
 
-    if (data[i] == ';' || data[i] == ':')
+    if ((data[i] == ';' || data[i] == ':') && (data[i-1] != '\\' || i < 1))
     {
       val  = !val;
       size = 1;

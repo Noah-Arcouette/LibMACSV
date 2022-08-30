@@ -100,24 +100,26 @@ char* acsvGen (struct MIMIK_ACSV conf)
   *gen                 = 0;
   register size_t size = 1;
 
-  char *out;
+  char *key;
+  char *val;
 
   for (register size_t i = 0; i<conf.size && conf.keys[i][0]; i++)
   {
     if (conf.keys[i])
     {
-      size += strlen(conf.keys[i]) + strlen(conf.vals[i]) + 2;
+      key = acsv_addExp(conf.keys[i]);
+      val = acsv_addExp(conf.vals[i]);
+
+      size += strlen(key) + strlen(val) + 2;
       gen   = (char*)realloc(gen, size * sizeof(char));
 
-      out = acsv_addExp(conf.keys[i]);
-      strcat(gen, out);
-      free(out);
+      strcat(gen, key);
+      strcat(gen, ";");
+      strcat(gen, val);
       strcat(gen, ";");
 
-      out = acsv_addExp(conf.vals[i]);
-      strcat(gen, out);
-      free(out);
-      strcat(gen, ";");
+      free(key);
+      free(val);
     }
   }
 

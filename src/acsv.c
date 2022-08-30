@@ -23,12 +23,12 @@ struct MIMIK_ACSV acsvParse (char *data)
     {
       // printf("%c ; %d ; %ld ; %ld\n", data[i], val, size, conf.size);
 
-      if (data[i] == '\n' || data[i] == '\r' || data[i] == '\t' || (data[i] == '\\' && i>0 && data[i-1] != '\\'))
+      if (data[i] == '\n' || data[i] == '\r' || data[i] == '\t' || (data[i] == '\\' && data[i-1] != '\\'))
       {
         continue;
       }
 
-      if ((data[i] == ';' || data[i] == ':') && (data[i-1] != '\\' || i < 1))
+      if ((data[i] == ';' || data[i] == ':') && (data[i-1] != '\\' || i<1))
       {
         val  = !val;
         size = 1;
@@ -70,22 +70,46 @@ struct MIMIK_ACSV acsvParse (char *data)
   return conf;
 }
 
+char *acsv_addExp (char *in)
+{
+	size_t size = strlen(in)+1; 
+	char *out   = (char*)malloc(size * sizeof(char));
+
+  char c[3] = { '\\', 0, 0 };
+
+	for (register size_t i = 0; in[i]!=0; i++)
+	{
+    if (in[i] == ':' || in[i] == ';')
+    {
+      out = (char*)realloc(out, ++size * sizeof(char));
+      c[1] = in[i];
+      strcat(out, c);
+
+      continue;
+    }
+
+		strncat(out, &in[i], 1);
+	}
+
+	return out;
+}
+
 char* acsvGen (struct MIMIK_ACSV conf)
 {
   register char *gen   = (char*)malloc(1 * sizeof(char));
   *gen                 = 0;
   register size_t size = 1;
 
-  for (register size_t i = 0; i<conf.size; i++)
+  for (register size_t i = 0; i<conf.size && conf.keys[i][0]; i++)
   {
     if (conf.keys[i])
     {
       size += strlen(conf.keys[i]) + strlen(conf.vals[i]) + 2;
       gen   = (char*)realloc(gen, size * sizeof(char));
 
-      strcat(gen, conf.keys[i]);
+      strcat(gen, acsv_addExp(conf.keys[i]));
       strcat(gen, ";");
-      strcat(gen, conf.vals[i]);
+      strcat(gen, acsv_addExp(conf.vals[i]));
       strcat(gen, ";");
     }
   }

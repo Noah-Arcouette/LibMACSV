@@ -4,12 +4,13 @@
 
 int main ()
 {
-  acsv conf = acsvParse("");
+  acsv conf = acsvParse("\\:hi;hi;");
 
-  for (size_t i = 0; i<conf.size; i++)
-  {
-    printf("%s : %s\n", conf.keys[i], conf.vals[i]);
-  }
+  char *out = acsvGen(conf);
+
+  printf(out);
+
+  free(out);
 
   acsvFree(conf);
 

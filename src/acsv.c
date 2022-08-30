@@ -17,54 +17,56 @@ struct MIMIK_ACSV acsvParse (char *data)
   register size_t size = 1;
   register int    val  = 0;
 
-  for (register size_t i = 0; data[i]!=0; i++)
+  if (data != NULL)
   {
-    // printf("%c ; %d ; %ld ; %ld\n", data[i], val, size, conf.size);
-
-    if (data[i] == '\n' || data[i] == '\r' || data[i] == '\t' || (data[i] == '\\' && i>0 && data[i-1] != '\\'))
+    for (register size_t i = 0; data[i]!=0; i++)
     {
-      continue;
-    }
+      // printf("%c ; %d ; %ld ; %ld\n", data[i], val, size, conf.size);
 
-    if ((data[i] == ';' || data[i] == ':') && (data[i-1] != '\\' || i < 1))
-    {
-      val  = !val;
-      size = 1;
-
-      if (!val)
+      if (data[i] == '\n' || data[i] == '\r' || data[i] == '\t' || (data[i] == '\\' && i>0 && data[i-1] != '\\'))
       {
-        conf.size++;
-        conf.keys               = (char**)realloc(conf.keys, conf.size * sizeof(char*));
-        conf.keys[conf.size-1]  = (char*) malloc(1 * sizeof(char));
-        *conf.keys[conf.size-1] = 0;
-        conf.vals               = (char**)realloc(conf.vals, conf.size * sizeof(char*));
-        conf.vals[conf.size-1]  = (char*) malloc(1 * sizeof(char));
-        *conf.vals[conf.size-1] = 0;
+        continue;
+      }
+
+      if ((data[i] == ';' || data[i] == ':') && (data[i-1] != '\\' || i < 1))
+      {
+        val  = !val;
+        size = 1;
+
+        if (!val)
+        {
+          conf.size++;
+          conf.keys               = (char**)realloc(conf.keys, conf.size * sizeof(char*));
+          conf.keys[conf.size-1]  = (char*) malloc(1 * sizeof(char));
+          *conf.keys[conf.size-1] = 0;
+          conf.vals               = (char**)realloc(conf.vals, conf.size * sizeof(char*));
+          conf.vals[conf.size-1]  = (char*) malloc(1 * sizeof(char));
+          *conf.vals[conf.size-1] = 0;
+
+          continue;
+        }
+
+        if (data[i] == ':' && data[i+1] != 0)
+        {
+          i++;
+        }
 
         continue;
       }
 
-      if (data[i] == ':' && data[i+1] != 0)
+      if (val)
       {
-        i++;
+        conf.vals[conf.size-1] = (char*)realloc(conf.vals[conf.size-1], ++size * sizeof(char));
+        strncat(conf.vals[conf.size-1], &data[i], 1);
+
+        continue;
       }
 
-      continue;
+      conf.keys[conf.size-1] = (char*)realloc(conf.keys[conf.size-1], ++size * sizeof(char));
+      strncat(conf.keys[conf.size-1], &data[i], 1);
     }
-
-    if (val)
-    {
-      conf.vals[conf.size-1] = (char*)realloc(conf.vals[conf.size-1], ++size * sizeof(char));
-      strncat(conf.vals[conf.size-1], &data[i], 1);
-
-      continue;
-    }
-
-    conf.keys[conf.size-1] = (char*)realloc(conf.keys[conf.size-1], ++size * sizeof(char));
-    strncat(conf.keys[conf.size-1], &data[i], 1);
+    conf.size--;
   }
-
-  conf.size--;
 
   return conf;
 }

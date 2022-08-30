@@ -42,7 +42,7 @@ clean: message clean_part
 gen: message clean_part
 	printf "\x1b[1;39m━━━━━━━━━━━━━┛\x1b[0m\n\n"
 
-	hd -T ./src/main.c -S -n libmacsv -v 1.1 -m makefile -b ./bin/ -o ./obj/ -s ./src/ -i ./inc/ -f -Wall -f -Wextra -f -O2 -f -std=gnu18
+	hd -n libmacsv -v 1.1 -m makefile -b ./bin/ -o ./obj/ -S  -s ./src/ -i ./inc/ -f -Wall -f -Wextra -f -O2 -f -std=gnu18 -T ./src/main.c
 	printf "\x1b[1;32m\n━━━━━━━━━━━━━┓\nSUCCESS      ┃  \x1b[39mCreate new\x1b[35m MakeFile \x1b[32m\n━━━━━━━━━━━━━┛\x1b[0m\n"
 
 # print settings

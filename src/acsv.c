@@ -65,7 +65,6 @@ struct MIMIK_ACSV acsvParse (char *data)
       conf.keys[conf.size-1] = (char*)realloc(conf.keys[conf.size-1], ++size * sizeof(char));
       strncat(conf.keys[conf.size-1], &data[i], 1);
     }
-    conf.size--;
   }
 
   return conf;

@@ -4,7 +4,7 @@
 
 int main ()
 {
-  acsv conf = acsvParse(NULL);
+  acsv conf = acsvParse("");
 
   for (size_t i = 0; i<conf.size; i++)
   {

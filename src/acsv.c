@@ -74,6 +74,7 @@ char *acsv_addExp (char *in)
 {
 	size_t size = strlen(in)+1; 
 	char *out   = (char*)malloc(size * sizeof(char));
+  strcpy(out, "");
 
   char c[3] = { '\\', 0, 0 };
 

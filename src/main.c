@@ -4,7 +4,7 @@
 
 int main ()
 {
-  acsv conf = acsvParse("\\:hi;hi;");
+  acsv conf = acsvParse("imd: https\\://raw.githubusercontent.com/Noah-Arcouette/imd/master/net;imd: https\\://raw.githubusercontent.com/Noah-Arcouette/imd/master/net;imd: https\\://raw.githubusercontent.com/Noah-Arcouette/imd/master/net;");
 
   char *out = acsvGen(conf);
 
